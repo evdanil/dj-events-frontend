@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
 import Modal from '@/components/Modal'
+import ImageUpload from '@/components/ImageUpload'
 
 function EditEventPage({ evt }) {
   const router = useRouter()
@@ -77,6 +78,16 @@ function EditEventPage({ evt }) {
       // console.log(evt)
       router.push(`/events/${evt.data.attributes.slug}`)
     }
+  }
+
+  const imageUploaded = async (e) => {
+    const res = await fetch(`${API_URL}/api/events/${evt.id}?populate=*`)
+    const data = await res.json()
+    // console.log(data)
+    setImagePreview(
+      data.data.attributes.image.data.attributes.formats.thumbnail.url
+    )
+    setShowModal(false)
   }
 
   return (
@@ -194,7 +205,10 @@ function EditEventPage({ evt }) {
         show={showModal}
         onClose={() => setShowModal(false)}
       >
-        IMAGE UPLOAD
+        <ImageUpload
+          evtId={evt.id}
+          imageUploaded={imageUploaded}
+        />
       </Modal>
     </Layout>
   )
