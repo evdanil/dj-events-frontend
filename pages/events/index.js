@@ -26,6 +26,7 @@ export async function getStaticProps() {
       id: evt.id,
     }
   })
+  // console.log(events)
   return {
     props: { events },
     revalidate: 1,

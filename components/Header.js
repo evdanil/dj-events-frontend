@@ -14,6 +14,14 @@ function Header() {
           <li>
             <Link href='/events'>Events</Link>
           </li>
+          <li>
+            <Link
+              href='/events/add'
+              legacyBehavior
+            >
+              <a>Add Event</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
