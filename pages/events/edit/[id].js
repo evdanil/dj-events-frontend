@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
+import Modal from '@/components/Modal'
 
 function EditEventPage({ evt }) {
   const router = useRouter()
@@ -25,6 +26,8 @@ function EditEventPage({ evt }) {
   const [imagePreview, setImagePreview] = useState(
     evt.image ? evt.image.url : null
   )
+
+  const [showModal, setShowModal] = useState(false)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -179,11 +182,20 @@ function EditEventPage({ evt }) {
       )}
 
       <div>
-        <button className='btn-secondary'>
+        <button
+          onClick={() => setShowModal(true)}
+          className='btn-secondary'
+        >
           <FaImage />
           Set Image
         </button>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        IMAGE UPLOAD
+      </Modal>
     </Layout>
   )
 }
