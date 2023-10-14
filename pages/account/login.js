@@ -7,11 +7,17 @@ import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
 import AuthContext from '@/context/AuthContext'
 
-function login() {
+function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const { login, error } = useContext(AuthContext)
+  const showError = async () => error && toast.error(error)
+
+  useEffect(() => {
+    // console.log('all bad!' + error)
+    showError()
+  }, [error])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -57,4 +63,4 @@ function login() {
   )
 }
 
-export default login
+export default LoginPage

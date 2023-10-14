@@ -14,6 +14,10 @@ function register() {
   const [password2, setPassword2] = useState('')
 
   const { register, error } = useContext(AuthContext)
+  const showError = async () => error && toast.error(error)
+  useEffect(() => {
+    showError()
+  }, [error])
 
   const handleSubmit = (e) => {
     e.preventDefault()
