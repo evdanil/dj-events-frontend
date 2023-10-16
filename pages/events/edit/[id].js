@@ -10,8 +10,9 @@ import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
 import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
+import { parseCookies } from '@/helpers/index'
 
-function EditEventPage({ evt }) {
+function EditEventPage({ evt, token }) {
   const router = useRouter()
 
   const [values, setValues] = useState({
@@ -67,11 +68,16 @@ function EditEventPage({ evt }) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: body,
     })
     // console.log(res)
     if (!res.ok) {
+      if (res.status === 401 || res.status === 403) {
+        toast.error('No token included or unauthorized')
+        return
+      }
       toast.error('Something went wrong')
     } else {
       const evt = await res.json()
@@ -215,6 +221,7 @@ function EditEventPage({ evt }) {
 }
 
 export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req)
   const res = await fetch(`${API_URL}/api/events/${id}?populate=*`)
   const evt = await res.json()
   // console.log(evt)
@@ -245,6 +252,7 @@ export async function getServerSideProps({ params: { id }, req }) {
   // console.log(req.headers.cookie)
   return {
     props: {
+      token,
       evt: result,
     },
   }

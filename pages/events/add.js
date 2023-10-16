@@ -1,3 +1,4 @@
+import { parseCookies } from '@/helpers/index'
 import Layout from '@/components/Layout'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -7,7 +8,7 @@ import styles from '@/styles/Form.module.css'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-function AddEventPage() {
+function AddEventPage({ token }) {
   const [values, setValues] = useState({
     name: '',
     perfomers: '',
@@ -57,15 +58,20 @@ function AddEventPage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: body,
     })
-    console.log(res)
+    // console.log(res)
     if (!res.ok) {
+      if (res.status === 401 || res.status === 403) {
+        toast.error('No token included')
+        return
+      }
       toast.error('Something went wrong')
     } else {
       const evt = await res.json()
-      console.log(evt)
+      // console.log(evt)
       router.push(`/events/${evt.data.attributes.slug}`)
     }
   }
@@ -163,3 +169,12 @@ function AddEventPage() {
 }
 
 export default AddEventPage
+export async function getServerSideProps({ req }) {
+  const { token } = parseCookies(req)
+
+  return {
+    props: {
+      token,
+    },
+  }
+}
