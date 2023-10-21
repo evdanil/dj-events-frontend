@@ -5,54 +5,19 @@ import { FaPencilAlt, FaTimes } from 'react-icons/fa'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.css'
 import { useRouter } from 'next/router'
+import EventMap from '@/components/EventMap'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function EventPage({ evt }) {
   // console.log(evt)
   const router = useRouter()
-  const deleteEvent = async (e) => {
-    if (confirm('Are you sure?')) {
-      const res = await fetch(`${API_URL}/api/events/${evt.id}`, {
-        method: 'DELETE',
-      })
-      // console.log(res)
-      try {
-        // const data = await res.json()
-        if (!res.ok) {
-          toast.error(res.statusText)
-          // console.log('NOT OK!')
-        } else {
-          router.push('/events')
-        }
-      } catch (error) {
-        toast.error(error)
-      }
-    }
-  }
 
   return (
     <Layout>
       {JSON.stringify(evt) !== '{}' && (
         <>
           <div className={styles.event}>
-            <div className={styles.controls}>
-              <Link
-                href={`/events/edit/${evt.id}`}
-                legacyBehavior
-              >
-                <a>
-                  <FaPencilAlt /> Edit Event
-                </a>
-              </Link>
-              <a
-                href='#'
-                className={styles.delete}
-                onClick={deleteEvent}
-              >
-                <FaTimes /> Delete Event
-              </a>
-            </div>
             <span>
               {new Date(evt.date).toLocaleDateString('en-AU')} at {evt.time}
             </span>
@@ -75,6 +40,7 @@ function EventPage({ evt }) {
             <p>{evt.description}</p>
             <h3>Venue: {evt.venue}</h3>
             <p>{evt.address}</p>
+            <EventMap evt={evt} />
             <Link
               href='/events'
               legacyBehavior

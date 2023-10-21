@@ -214,6 +214,7 @@ function EditEventPage({ evt, token }) {
         <ImageUpload
           evtId={evt.id}
           imageUploaded={imageUploaded}
+          token={token}
         />
       </Modal>
     </Layout>
@@ -234,7 +235,9 @@ export async function getServerSideProps({ params: { id }, req }) {
       slug: evt.data.attributes.slug,
       venue: evt.data.attributes.venue,
       address: evt.data.attributes.address,
-      date: evt.data.attributes.date.slice(0, 10),
+      date: evt.data.attributes.date
+        ? evt.data.attributes.date.slice(0, 10)
+        : new Date.now().toString(),
       time: evt.data.attributes.time,
       perfomers: evt.data.attributes.perfomers,
       createdAt: evt.data.attributes.createdAt,
