@@ -7,7 +7,7 @@ import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
 import AuthContext from '@/context/AuthContext'
 
-function LoginPage() {
+export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -17,7 +17,7 @@ function LoginPage() {
   useEffect(() => {
     // console.log('all bad!' + error)
     showError()
-  }, [error])
+  }, [error, showError])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -62,5 +62,3 @@ function LoginPage() {
     </Layout>
   )
 }
-
-export default LoginPage

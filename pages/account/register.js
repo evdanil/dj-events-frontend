@@ -8,7 +8,7 @@ import styles from '@/styles/AuthForm.module.css'
 import AuthContext from '@/context/AuthContext'
 import register from 'pages/api/register'
 
-function RegisterPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,7 +18,7 @@ function RegisterPage() {
   const showError = async () => error && toast.error(error)
   useEffect(() => {
     showError()
-  }, [error])
+  }, [error, showError])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -86,5 +86,3 @@ function RegisterPage() {
     </Layout>
   )
 }
-
-export default RegisterPage

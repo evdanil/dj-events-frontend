@@ -44,7 +44,7 @@ function EventMap({ evt }) {
         console.log(error)
       }
     )
-  }, [])
+  }, [evt.address, viewport])
 
   setKey(process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY)
   if (loading) return false

@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useRouter } from 'next/router'
 
-function DashboardPage({ events, token }) {
+export default function DashboardPage({ events, token }) {
   const router = useRouter()
   const deleteEvent = async (id) => {
     if (confirm('Are you sure?')) {
@@ -52,8 +52,6 @@ function DashboardPage({ events, token }) {
     </Layout>
   )
 }
-
-export default DashboardPage
 
 export async function getServerSideProps({ req }) {
   const { token } = parseCookies(req)
