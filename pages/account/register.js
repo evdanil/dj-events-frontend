@@ -6,8 +6,9 @@ import Link from 'next/link'
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
 import AuthContext from '@/context/AuthContext'
+import register from 'pages/api/register'
 
-function register() {
+function RegisterPage() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -86,4 +87,4 @@ function register() {
   )
 }
 
-export default register
+export default RegisterPage
