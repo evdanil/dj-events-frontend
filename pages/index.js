@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function HomePage({ events }) {
   // console.log(events)
+  // const events = props
   return (
     <Layout>
       <h1>Upcoming Events</h1>
@@ -27,7 +28,7 @@ export default function HomePage({ events }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(
     `${API_URL}/api/events?_sort=date:ASC&_limit=3&populate=*`
   )
@@ -45,6 +46,6 @@ export async function getStaticProps() {
     props: {
       events: events ? events : [],
     },
-    revalidate: 1,
+    // revalidate: 1,
   }
 }
