@@ -15,10 +15,11 @@ export default function RegisterPage() {
   const [password2, setPassword2] = useState('')
 
   const { register, error } = useContext(AuthContext)
-  const showError = async () => error && toast.error(error)
+
   useEffect(() => {
+    const showError = async () => error && toast.error(error)
     showError()
-  }, [error, showError])
+  }, [error])
 
   const handleSubmit = (e) => {
     e.preventDefault()
