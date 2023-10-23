@@ -18,7 +18,8 @@ export default function RegisterPage() {
   const showError = async () => error && toast.error(error)
   useEffect(() => {
     showError()
-  }, [showError])
+    // eslint-disable-next-line no-use-before-define
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()

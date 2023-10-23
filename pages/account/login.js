@@ -14,10 +14,9 @@ export default function LoginPage() {
   const { login, error } = useContext(AuthContext)
   const showError = async () => error && toast.error(error)
   useEffect(() => {
-    // console.log('all bad!' + error)
-
     showError()
-  }, [showError])
+    // eslint-disable-next-line no-use-before-define
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
