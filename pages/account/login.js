@@ -17,7 +17,7 @@ export default function LoginPage() {
     // console.log('all bad!' + error)
     const showError = async () => error && toast.error(error)
     showError()
-  }, [error])
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()
