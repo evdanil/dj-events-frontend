@@ -12,12 +12,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
 
   const { login, error } = useContext(AuthContext)
-
+  const showError = async () => error && toast.error(error)
   useEffect(() => {
     // console.log('all bad!' + error)
-    const showError = async () => error && toast.error(error)
+
     showError()
-  })
+  }, [showError])
 
   const handleSubmit = (e) => {
     e.preventDefault()
