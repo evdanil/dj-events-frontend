@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   // Login user
   const login = async ({ email: identifier, password }) => {
     // console.log({ identifier, password })
-    const res = await fetch(`${NEXT_URL}/api/login`, {
+    const res = await fetch(`/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
     const data = await res.json()
 
-    //console.log(data)
+    // console.log(data)
     if (res.ok) {
       setUser(data.user)
       setTimeout(() => router.push('/account/dashboard'), 1000)
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   // Logout user
   const logout = async (user) => {
-    const res = await fetch(`${NEXT_URL}/api/logout`, {
+    const res = await fetch(`/api/logout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user logged in
   const checkUserLoggedIn = async (user) => {
-    const res = await fetch(`${NEXT_URL}/api/user`)
+    const res = await fetch(`/api/user`)
     const data = await res.json()
 
     if (res.ok) {
