@@ -32,7 +32,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
     `${API_URL}/api/events?sort=date:ASC&populate=*&pagination[limit]=${PER_PAGE}&pagination[start]=${start}`
   )
   const data = await eventRes.json()
-  console.log(data)
+  // console.log(data)
   const total = data.meta.pagination.total
   const events = data.data.map((evt) => {
     return {

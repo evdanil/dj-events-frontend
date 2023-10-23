@@ -30,10 +30,11 @@ export default function HomePage({ events }) {
 
 export async function getServerSideProps() {
   const res = await fetch(
-    `${API_URL}/api/events?_sort=date:ASC&_limit=3&populate=*`
+    `${API_URL}/api/events?_sort=date:ASC&_limit=5&populate=*`
   )
   const data = await res.json()
 
+  // const events = ''
   // console.log(data)
   const events = data.data.map((evt) => {
     return {
