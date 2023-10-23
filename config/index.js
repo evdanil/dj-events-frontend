@@ -6,4 +6,4 @@ export const NEXT_URL =
 
 export const NODE_ENV = process.env.NEXT_PUBLIC_NODE_ENV || 'development'
 
-export const PER_PAGE = 5
+export const PER_PAGE = process.env.NEXT_PUBLIC_PER_PAGE || 5
